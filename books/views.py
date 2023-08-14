@@ -1,3 +1,4 @@
+from books.serializers import BookSerializer, BookListSerializer, BookDetailSerializer
 from rest_framework import mixins
 from rest_framework.viewsets import GenericViewSet
 
@@ -5,6 +6,9 @@ from books.models import Book
 
 
 class BookViewsSet(
+    mixins.ListModelMixin,
+    mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
     mixins.UpdateModelMixin,
     mixins.DestroyModelMixin,
     GenericViewSet,
@@ -12,14 +16,14 @@ class BookViewsSet(
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
-    def perform_put(self, serializer):
-        instance = serializer.save()
-        instance.inventory += 1
-        instance.save()
+    def get_serializer_class(self):
+        if self.action == "list":
+            return BookListSerializer
 
-    def perform_destroy(self, instance):
-        instance.inventory -= 1
-        instance.save()
+        if self.action == "retrieve":
+            return BookDetailSerializer
+
+        return BookSerializer
 
     @staticmethod
     def _params_to_ints(qs):
@@ -41,3 +45,12 @@ class BookViewsSet(
             queryset = queryset.filter(author__id__in=author_ids)
 
         return queryset.distinct()
+
+    def perform_put(self, serializer):
+        instance = serializer.save()
+        instance.inventory += 1
+        instance.save()
+
+    def perform_destroy(self, instance):
+        instance.inventory -= 1
+        instance.save()
