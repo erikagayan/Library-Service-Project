@@ -27,12 +27,18 @@ class Migration(migrations.Migration):
                 (
                     "cover",
                     models.CharField(
-                        choices=[("HARD", "Hard Cover"), ("SOFT", "Soft Cover")],
+                        choices=[
+                            ("HARD", "Hard Cover"),
+                            ("SOFT", "Soft Cover"),
+                        ],
                         max_length=4,
                     ),
                 ),
                 ("inventory", models.PositiveIntegerField()),
-                ("daily_fee", models.DecimalField(decimal_places=2, max_digits=6)),
+                (
+                    "daily_fee",
+                    models.DecimalField(decimal_places=2, max_digits=6),
+                ),
             ],
             options={
                 "ordering": ["title"],
@@ -52,7 +58,10 @@ class Migration(migrations.Migration):
                 ),
                 ("borrow_date", models.DateField(auto_now_add=True)),
                 ("expected_return_date", models.DateField()),
-                ("actual_return_date", models.DateField(blank=True, null=True)),
+                (
+                    "actual_return_date",
+                    models.DateField(blank=True, null=True),
+                ),
                 (
                     "book",
                     models.ForeignKey(
@@ -81,18 +90,23 @@ class Migration(migrations.Migration):
                 (
                     "status",
                     models.CharField(
-                        choices=[("PENDING", "Pending"), ("PAID", "Paid")], max_length=7
+                        choices=[("PENDING", "Pending"), ("PAID", "Paid")],
+                        max_length=7,
                     ),
                 ),
                 (
                     "type",
                     models.CharField(
-                        choices=[("PAYMENT", "Payment"), ("FINE", "Fine")], max_length=7
+                        choices=[("PAYMENT", "Payment"), ("FINE", "Fine")],
+                        max_length=7,
                     ),
                 ),
                 ("session_url", models.URLField()),
                 ("session_id", models.CharField(max_length=50)),
-                ("money_to_pay", models.DecimalField(decimal_places=2, max_digits=6)),
+                (
+                    "money_to_pay",
+                    models.DecimalField(decimal_places=2, max_digits=6),
+                ),
                 (
                     "borrowing",
                     models.ForeignKey(
