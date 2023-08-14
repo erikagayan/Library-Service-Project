@@ -7,7 +7,6 @@ urlpatterns = [
     path("api/books/", include("books.urls", namespace="book")),
     path("api/users/", include("users.urls", namespace="user")),
 
-
     path(
         "api/doc/swagger/",
         SpectacularSwaggerView.as_view(url_name="schema"),
@@ -20,4 +19,5 @@ urlpatterns = [
     ),
 
     path("__debug__/", include("debug_toolbar.urls")),
+
 ]
