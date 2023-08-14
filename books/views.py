@@ -1,11 +1,21 @@
-from books.serializers import BookSerializer, BookListSerializer, BookDetailSerializer
-from rest_framework import mixins
+from django.db import IntegrityError
+from rest_framework import mixins, status
+from rest_framework.exceptions import ValidationError
+from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
 from books.models import Book
 
+from books.serializers import (
+    BookSerializer,
+    BookListSerializer,
+    BookDetailSerializer,
+    BookDeleteSerializer,
+    BookUpdateSerializer,
+)
 
-class BookViewsSet(
+
+class BookViewSet(
     mixins.ListModelMixin,
     mixins.CreateModelMixin,
     mixins.RetrieveModelMixin,
@@ -22,6 +32,12 @@ class BookViewsSet(
 
         if self.action == "retrieve":
             return BookDetailSerializer
+
+        if self.action in ("update", "partial_update"):
+            return BookUpdateSerializer
+
+        if self.action == "delete":
+            return BookDeleteSerializer
 
         return BookSerializer
 
@@ -46,11 +62,12 @@ class BookViewsSet(
 
         return queryset.distinct()
 
-    def perform_put(self, serializer):
-        instance = serializer.save()
-        instance.inventory += 1
-        instance.save()
-
-    def perform_destroy(self, instance):
-        instance.inventory -= 1
-        instance.save()
+    def perform_create(self, serializer):
+        try:
+            instance = serializer.save()
+            instance.save()
+        except ValidationError:
+            return Response(
+                status=status.HTTP_400_BAD_REQUEST,
+                exception=True,
+            )
