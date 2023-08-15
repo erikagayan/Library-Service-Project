@@ -13,6 +13,7 @@ bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 
 
+
 @dp.message_handler(commands=["start", "help"])
 async def send_welcome(message: types.Message):
     user_id = message.from_user.id
@@ -32,13 +33,13 @@ async def get_data_from_drf(message: types.Message):
     await message.reply(f"Received data from DRF: {data[2]}")
 
 
-async def send_message_to_user(chat_id, message_text):
-    await bot.send_message(chat_id=chat_id, text=message_text)
 
-async def sent():
-    chat_id = "@RostikFurman"  # Replace with the actual chat ID
-    message = "Hello, this is your bot!"
-    await send_message_to_user(chat_id, message)
+@dp.message_handler(commands=['test'])
+async def process_start_command(message: types.Message):
+    await bot.send_message(chat_id="@", text="test message")
+
+
+
 
 # Call the 'sent' function to send a message when the bot starts
 async def on_startup(dp):
