@@ -2,7 +2,7 @@ import logging
 import requests
 from aiogram import Bot, Dispatcher, types
 from aiogram.utils import executor
-from django.contrib.sites import requests
+
 
 logging.basicConfig(level=logging.INFO)
 
@@ -27,15 +27,21 @@ async def get_data_from_drf(message: types.Message):
     response = requests.get('http://127.0.0.1:8000/api/books/')
 
     data = response.json()
-    print(data)
+    print(data[2])
     # Process the data and send a response
     await message.reply(f"Received data from DRF: {data[2]}")
 
 
+async def send_message_to_user(chat_id, message_text):
+    await bot.send_message(chat_id=chat_id, text=message_text)
+
 async def sent():
-    # Replace '123456789' with the actual chat ID
-    chat_id = "@"
+    chat_id = "@RostikFurman"  # Replace with the actual chat ID
     message = "Hello, this is your bot!"
     await send_message_to_user(chat_id, message)
+
+# Call the 'sent' function to send a message when the bot starts
+async def on_startup(dp):
+    await sent()
 
 executor.start_polling(dp, skip_updates=True)
