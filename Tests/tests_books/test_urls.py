@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
@@ -8,6 +9,13 @@ from books.models import Book
 class BookViewSetTestCase(TestCase):
     def setUp(self):
         self.client = APIClient()
+        self.user = get_user_model().objects.create_user(
+            "admin@admin.com",
+            "password",
+            is_staff=True,
+        )
+
+        self.client.force_authenticate(self.user)
         self.book_data = {
             "title": "Sample Book",
             "author": "John Doe",

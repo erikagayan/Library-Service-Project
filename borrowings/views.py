@@ -1,7 +1,9 @@
 import datetime
-
-from rest_framework import mixins, viewsets, serializers
+from django.utils import timezone
+from rest_framework import mixins, viewsets, serializers, status
+from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 from borrowings.models import Borrowing
 from .serializers import (
@@ -17,6 +19,7 @@ class BorrowingViewSet(
     mixins.ListModelMixin,
     mixins.CreateModelMixin,
     mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
     viewsets.GenericViewSet,
 ):
     queryset = Borrowing.objects.select_related("book", "user")
@@ -78,3 +81,24 @@ class BorrowingViewSet(
 
         instance = serializer.save(user=self.request.user)
         instance.save()
+
+
+    @action(detail=True, methods=["put"])
+    def return_borrowing(self, request, pk=None):
+        borrowing = self.get_object()
+
+        if borrowing.actual_return_date:
+            return Response(
+                {"detail": "This borrowing has already been returned."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        borrowing.actual_return_date = timezone.now().date()
+        borrowing.save()
+
+        borrowing.book.inventory += 1
+        borrowing.book.save()
+
+        serializer = BorrowingDetailSerializer(borrowing)
+
+        return Response(serializer.data)
