@@ -44,14 +44,14 @@ class UnAuthenticatedBookViesSet(TestCase):
             "daily_fee": 8.0,
         }
         result_post = self.client.post(BOOK_URL, new_book_data)
-        self.assertEqual(result_post.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+        self.assertEqual(result_post.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_partial_update_not_allowed(self) -> None:
         book = self.book
         url = detail_url(book.id)
         partial_data = {"title": "Partial Update"}
         result_patch = self.client.patch(url, partial_data)
-        self.assertEqual(result_patch.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+        self.assertEqual(result_patch.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_update_not_allowed(self) -> None:
         book = self.book
@@ -61,14 +61,14 @@ class UnAuthenticatedBookViesSet(TestCase):
             "author": "Updated Author",
         }
         result_put = self.client.put(url, updated_data)
-        self.assertEqual(result_put.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+        self.assertEqual(result_put.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_delete_not_allowed_required(self) -> None:
         book = self.book
         url = detail_url(book.id)
         result_delete = self.client.delete(url)
 
-        self.assertEqual(result_delete.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+        self.assertEqual(result_delete.status_code, status.HTTP_401_UNAUTHORIZED)
 
 
 class AdminBookApiTest(TestCase):
@@ -140,7 +140,7 @@ class AuthenticatedBookApiTest(TestCase):
 
         result = self.client.post(BOOK_URL, payload)
 
-        self.assertEqual(result.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+        self.assertEqual(result.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_update_book(self):
         payload = {
@@ -159,4 +159,4 @@ class AuthenticatedBookApiTest(TestCase):
 
         result = self.client.delete(url)
 
-        self.assertEqual(result.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+        self.assertEqual(result.status_code, status.HTTP_403_FORBIDDEN)

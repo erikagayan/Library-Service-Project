@@ -14,6 +14,7 @@ from books.serializers import (
     BookUpdateSerializer,
 )
 
+
 class BookViewSet(
     mixins.ListModelMixin,
     mixins.CreateModelMixin,
@@ -31,7 +32,7 @@ class BookViewSet(
         """
         if self.action == "retrieve":
             permission_classes = [IsAuthenticated | IsAdminUser]
-        elif self.action in ("create", "update", "delete"):
+        elif self.action in ("create", "update", "destroy"):
             permission_classes = [IsAdminUser]
         else:
             permission_classes = [IsAuthenticatedOrReadOnly]
