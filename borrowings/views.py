@@ -54,20 +54,28 @@ class BorrowingViewSet(
         return BorrowingSerializer
 
     def perform_create(self, serializer):
-        instance = serializer.save()
+        instance = serializer.save(user=self.request.user)
 
         book = instance.book
         if book.inventory == 0:
             raise serializers.ValidationError("Book inventory is 0.")
-
         book.inventory -= 1
         book.save()
 
-        instance.user = self.request.user
         instance.save()
 
-        if instance.expected_return_date and instance.expected_return_date < instance.borrow_date:
-            raise serializers.ValidationError("Expected return date cannot be earlier than borrow date.")
+        if (
+                instance.expected_return_date
+                and instance.expected_return_date < instance.borrow_date
+        ):
+            raise serializers.ValidationError(
+                "Expected return date cannot be earlier than borrow date."
+            )
 
-        if instance.actual_return_date and instance.actual_return_date < instance.borrow_date:
-            raise serializers.ValidationError("Actual return date cannot be earlier than borrow date.")
+        if (
+                instance.actual_return_date
+                and instance.actual_return_date < instance.borrow_date
+        ):
+            raise serializers.ValidationError(
+                "Actual return date cannot be earlier than borrow date."
+            )
