@@ -10,5 +10,4 @@ urlpatterns = [
     path("", include(router.urls)),
 ]
 
-
 app_name = "borrowing"
