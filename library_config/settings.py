@@ -27,9 +27,12 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "debug_toolbar",
     "rest_framework_simplejwt",
-  
+    "django_dump_load_utf8",
+
     "users",
     "books",
+    "borrowings",
+    "payments"
 ]
 
 MIDDLEWARE = [
