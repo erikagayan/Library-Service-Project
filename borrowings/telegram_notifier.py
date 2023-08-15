@@ -1,4 +1,5 @@
 import logging
+import requests
 from aiogram import Bot, Dispatcher, types
 from aiogram.utils import executor
 
@@ -10,7 +11,8 @@ API_TOKEN = '6577800215:AAFD143UvazP2izf0x7edWThq-M1VRe75Gk'
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 
-@dp.message_handler(commands=['start', 'help'])
+
+@dp.message_handler(commands=["start", "help"])
 async def send_welcome(message: types.Message):
     user_id = message.from_user.id
     user_full_name = message.from_user.full_name
@@ -18,17 +20,21 @@ async def send_welcome(message: types.Message):
 
     await message.reply(f"Привіт {user_full_name}! Я бот. Напишіть щось, і я повторю це.")
 
+
 @dp.message_handler(commands=['get_data'])
 async def get_data_from_drf(message: types.Message):
-    try:
-        # Make a GET request to your DRF API
-        response = requests.get('http://your-drf-api-url/data/')
-        data = response.json()
+    response = requests.get('http://127.0.0.1:8000/api/books/')
 
-        # Process the data and send a response
-        await message.reply(f"Received data from DRF: {data}")
-    except Exception as e:
-        await message.reply(f"An error occurred: {str(e)}")
+    data = response.json()
+    print(data)
+    # Process the data and send a response
+    await message.reply(f"Received data from DRF: {data[2]}")
 
-if __name__ == '__main__':
-    executor.start_polling(dp, skip_updates=True)
+
+async def sent():
+    # Replace '123456789' with the actual chat ID
+    chat_id = "@"
+    message = "Hello, this is your bot!"
+    await send_message_to_user(chat_id, message)
+
+executor.start_polling(dp, skip_updates=True)
