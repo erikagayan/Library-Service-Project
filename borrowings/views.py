@@ -8,7 +8,9 @@ from borrowings.models import Borrowing
 from .serializers import (
     BorrowingSerializer,
     BorrowingListSerializer,
-    BorrowingDetailSerializer
+    BorrowingDetailSerializer,
+    BorrowingCreateSerializer,
+
 )
 
 
@@ -50,15 +52,42 @@ class BorrowingViewSet(
         if self.action == "retrieve":
             return BorrowingDetailSerializer
 
+        if self.action == "create":
+            return BorrowingCreateSerializer
+
         return BorrowingSerializer
 
     def perform_create(self, serializer):
-        instance = serializer.save()
-        if instance.expected_return_date and instance.expected_return_date < instance.borrow_date:
-            raise serializers.ValidationError("Expected return date cannot be earlier than borrow date.")
+        instance = serializer.validated_data
 
-        if instance.actual_return_date and instance.actual_return_date < instance.borrow_date:
-            raise serializers.ValidationError("Actual return date cannot be earlier than borrow date.")
+        book = instance['book']
+        if book.inventory == 0:
+            raise serializers.ValidationError(
+                "Book inventory is 0. Cannot borrow the book."
+            )
+
+        book.inventory -= 1
+        book.save()
+
+        if (
+                instance.expected_return_date
+                and instance.expected_return_date < instance.borrow_date
+        ):
+            raise serializers.ValidationError(
+                "Expected return date cannot be earlier than borrow date."
+            )
+
+        if (
+                instance.actual_return_date
+                and instance.actual_return_date < instance.borrow_date
+        ):
+            raise serializers.ValidationError(
+                "Actual return date cannot be earlier than borrow date."
+            )
+
+        instance = serializer.save(user=self.request.user)
+        instance.save()
+
 
     @action(detail=True, methods=["put"])
     def return_borrowing(self, request, pk=None):

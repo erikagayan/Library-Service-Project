@@ -19,6 +19,6 @@ urlpatterns = [
         name="redoc",
     ),
 
-    path("__debug__/", include("debug_toolbar.urls")),
+    path("debug/", include("debug_toolbar.urls")),
 
 ]
