@@ -49,3 +49,10 @@ class BorrowingDetailSerializer(BorrowingSerializer):
             "book",
             "user"
         )
+
+
+class BorrowingCreateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Borrowing
+        fields = ("book", "expected_return_date")
