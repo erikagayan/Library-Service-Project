@@ -14,6 +14,7 @@ from books.serializers import (
     BookUpdateSerializer,
 )
 
+
 class BookViewSet(
     mixins.ListModelMixin,
     mixins.CreateModelMixin,
