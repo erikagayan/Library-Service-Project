@@ -30,3 +30,7 @@ class Payment(models.Model):
 
     def __str__(self):
         return f"{self.type} - {self.status}"
+
+    @property
+    def short_payment_info(self):
+        return f"{self.status}|{self.type}|{self.money_to_pay} cents"

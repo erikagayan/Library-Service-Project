@@ -1,18 +1,12 @@
 from django.urls import path
 from payments.views import (
     PaymentListView,
-    PaymentDetailView,
-    CheckoutSessionView
+    PaymentDetailView
 )
 
 urlpatterns = [
     path("", PaymentListView.as_view(), name="payment-list"),
     path("<int:pk>/", PaymentDetailView.as_view(), name="payment-detail"),
-    path(
-        "create-checkout-session/<int:pk>/",
-        CheckoutSessionView.as_view(),
-        name="create-checkout-session"
-    ),
 ]
 
 app_name = "payment"
