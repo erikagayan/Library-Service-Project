@@ -6,6 +6,7 @@ from decouple import config
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config("SECRET_KEY", default="super-secret", cast=str)
+TELEGRAM_BOT_TOKEN = config("TELEGRAM_BOT_TOKEN", default="your_telegram_token", cast=str)
 
 DEBUG = config("DEBUG", default=False, cast=bool)
 

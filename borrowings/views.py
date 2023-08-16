@@ -1,8 +1,14 @@
 import datetime
+# from borrowings.telegram_notifier import send_notification
+from borrowings.telegram_bot import TeleBot
+
+
 from django.utils import timezone
 from rest_framework import mixins, viewsets, serializers, status
 from rest_framework.decorators import action
+from rest_framework.parsers import JSONParser
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
 from borrowings.models import Borrowing
@@ -80,8 +86,19 @@ class BorrowingViewSet(
             )
 
         instance = serializer.save(user=self.request.user)
-        instance.save()
 
+        user = instance.user
+
+        print(instance)
+        print(serializer.data)
+        print(user.first_name, user.last_name)
+        print(book.title)
+
+        message = f"user {user.first_name} {user.last_name} borrow {book.title}"
+        TeleBot.handle()
+        TeleBot.send_borrow_book_notification(message)
+
+        instance.save()
 
     @action(detail=True, methods=["put"])
     def return_borrowing(self, request, pk=None):
