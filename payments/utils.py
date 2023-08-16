@@ -1,13 +1,12 @@
 import stripe
-from decouple import config
 from django.conf import settings
+from django.db import transaction
 
 from borrowings.models import Borrowing
 from payments.models import Payment
 
-stripe.api_key = config("STRIPE_SECRET_KEY")
 
-
+@transaction.atomic
 def payment_helper(borrowing_id, *args, **kwargs):
     """
     Creates Stripe session for the borrowing.
@@ -32,9 +31,9 @@ def payment_helper(borrowing_id, *args, **kwargs):
         ],
         metadata={"borrowing_id": borrowing.id},
         mode="payment",
-        success_url=settings.SITE_URL + "/?success=true&session_id="
+        success_url=settings.SITE_URL + "payments/success/"
                                         "{CHECKOUT_SESSION_ID}",
-        cancel_url=settings.SITE_URL + "/?canceled=true",
+        cancel_url=settings.SITE_URL + "payments/cancel",
     )
 
     Payment.objects.create(
