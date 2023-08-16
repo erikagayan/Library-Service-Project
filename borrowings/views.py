@@ -12,6 +12,7 @@ from .serializers import (
     BorrowingCreateSerializer,
 
 )
+from payments.utils import payment_helper
 
 
 class BorrowingViewSet(
@@ -71,16 +72,16 @@ class BorrowingViewSet(
 
         if (
                 instance["expected_return_date"]
-                and instance["expected_return_date"] <
-                datetime.datetime.now().date()
+                and instance["expected_return_date"]
+                < datetime.datetime.now().date()
         ):
             raise serializers.ValidationError(
                 "Expected return date cannot be earlier than borrow date."
             )
 
         instance = serializer.save(user=self.request.user)
-
         instance.save()
+        payment_helper(instance.id)
 
     @action(detail=True, methods=["put"])
     def return_borrowing(self, request, pk=None):

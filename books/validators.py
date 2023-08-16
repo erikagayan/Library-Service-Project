@@ -8,4 +8,6 @@ class UniqueTitleCoverValidator:
         title = value.get('title')
         cover = value.get('cover')
         if Book.objects.filter(title=title, cover=cover).exists():
-            raise ValidationError("A book with the same title and cover already exists.")
+            raise ValidationError(
+                "A book with the same title and cover already exists."
+            )
