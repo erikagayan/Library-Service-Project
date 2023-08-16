@@ -1,4 +1,6 @@
 import datetime
+
+from django.db import transaction
 from django.utils import timezone
 from rest_framework import mixins, viewsets, serializers, status
 from rest_framework.decorators import action
@@ -58,6 +60,7 @@ class BorrowingViewSet(
 
         return BorrowingSerializer
 
+    @transaction.atomic
     def perform_create(self, serializer):
         instance = serializer.validated_data
 
@@ -81,7 +84,11 @@ class BorrowingViewSet(
 
         instance = serializer.save(user=self.request.user)
         instance.save()
-        payment_helper(instance.id)
+        payment_helper(
+            instance.id,
+            date=instance.expected_return_date,
+            type_of_payment="PAYMENT"
+        )
 
     @action(detail=True, methods=["put"])
     def return_borrowing(self, request, pk=None):
@@ -100,5 +107,13 @@ class BorrowingViewSet(
         borrowing.book.save()
 
         serializer = BorrowingDetailSerializer(borrowing)
+
+        if borrowing.actual_return_date > borrowing.expected_return_date:
+            payment_helper(
+                borrowing.id,
+                date=borrowing.actual_return_date,
+                type_of_payment="FINE",
+                fine_multiplier=2
+            )
 
         return Response(serializer.data)
