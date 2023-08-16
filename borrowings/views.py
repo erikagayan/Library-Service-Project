@@ -72,8 +72,8 @@ class BorrowingViewSet(
 
         if (
                 instance["expected_return_date"]
-                and instance["expected_return_date"] <
-                datetime.datetime.now().date()
+                and instance["expected_return_date"]
+                < datetime.datetime.now().date()
         ):
             raise serializers.ValidationError(
                 "Expected return date cannot be earlier than borrow date."
@@ -81,7 +81,6 @@ class BorrowingViewSet(
 
         instance = serializer.save(user=self.request.user)
         instance.save()
-
 
     @action(detail=True, methods=["put"])
     def return_borrowing(self, request, pk=None):
