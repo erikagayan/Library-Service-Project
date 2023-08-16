@@ -13,6 +13,7 @@ from .serializers import (
     BorrowingCreateSerializer,
 
 )
+from payments.utils import payment_helper
 
 
 class BorrowingViewSet(
@@ -81,6 +82,7 @@ class BorrowingViewSet(
 
         instance = serializer.save(user=self.request.user)
         instance.save()
+        payment_helper(instance.id)
 
     @action(detail=True, methods=["put"])
     def return_borrowing(self, request, pk=None):
