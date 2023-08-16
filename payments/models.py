@@ -22,7 +22,7 @@ class Payment(models.Model):
         related_name="payments"
     )
     session_url = models.URLField()
-    session_id = models.CharField(max_length=50)
+    session_id = models.CharField(max_length=80)
     money_to_pay = models.DecimalField(max_digits=6, decimal_places=2)
 
     class Meta:
