@@ -33,7 +33,8 @@ INSTALLED_APPS = [
     "users",
     "books",
     "borrowings",
-    "payments"
+    "payments",
+    "telegram_bot",
 ]
 
 MIDDLEWARE = [
