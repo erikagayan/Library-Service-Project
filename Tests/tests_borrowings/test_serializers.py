@@ -38,6 +38,7 @@ class BorrowingSerializerTestCase(TestCase):
             "actual_return_date": None,
             "book": 1,
             "user": 1,
+            "payment": [],
         }
         self.assertEqual(serializer.data, expected_data)
 
@@ -50,6 +51,7 @@ class BorrowingSerializerTestCase(TestCase):
             "actual_return_date": None,
             "book": self.book.title,
             "user": self.user.email,
+            "payment": [],
         }
         self.assertEqual(serializer.data, expected_data)
 
@@ -72,6 +74,7 @@ class BorrowingSerializerTestCase(TestCase):
                 "email": "testuser@example.com",
                 "is_staff": False
             },
+            "payment": []
         }
         self.assertEqual(serializer.data, expected_data)
 
