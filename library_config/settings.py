@@ -9,6 +9,9 @@ SECRET_KEY = config("SECRET_KEY", default="super-secret", cast=str)
 TELEGRAM_BOT_TOKEN = config(
     "TELEGRAM_BOT_TOKEN", default="your_telegram_token", cast=str
 )
+JWT_TOKEN = config(
+    "JWT_TOKEN", default="your_jwt_token", cast=str
+)
 
 DEBUG = config("DEBUG", default=False, cast=bool)
 
