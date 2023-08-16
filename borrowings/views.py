@@ -80,13 +80,6 @@ class BorrowingViewSet(
 
         instance = serializer.save(user=self.request.user)
 
-        user = instance.user
-
-        print(instance)
-        print(serializer.data)
-        print(user.first_name, user.last_name)
-        print(book.title)
-
         instance.save()
 
     @action(detail=True, methods=["put"])
