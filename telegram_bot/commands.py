@@ -1,6 +1,6 @@
 from datetime import date
-
 import requests
+from asgiref.sync import sync_to_async
 from django.db.models import Sum
 from borrowings.models import Borrowing
 from books.models import Book
@@ -20,12 +20,17 @@ async def send_welcome(message: types.Message):
 async def process_start_command(message: types.Message):
     await bot.send_message(
         message.from_user.id,
-        "Новаbq бот Бібліотеки, привіт!"
+        "Я бот Бібліотеки, привіт!"
     )
 
 
 today = date.today()
-count_borrowing_today = Borrowing.objects.filter(borrow_date=today).count()
+
+@sync_to_async
+def get_borrowing_count_today():
+    return Borrowing.objects.filter(borrow_date=today).count()
+
+
 count_borrowing_total = Borrowing.objects.count()
 count_returned_today = Borrowing.objects.filter(
     actual_return_date=today).count()
@@ -35,6 +40,7 @@ count_number_of_titles = Book.objects.distinct().count()
 
 @dp.message_handler(commands="borrowing_today")
 async def borrowing_today_handler(message: types.Message):
+    count_borrowing_today = await get_borrowing_count_today()
     await bot.send_message(
         message.from_user.id,
         f"borrowed today: {count_borrowing_today}"
