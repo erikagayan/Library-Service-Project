@@ -26,16 +26,31 @@ async def process_start_command(message: types.Message):
 
 today = date.today()
 
+
 @sync_to_async
 def get_borrowing_count_today():
     return Borrowing.objects.filter(borrow_date=today).count()
 
 
-count_borrowing_total = Borrowing.objects.count()
-count_returned_today = Borrowing.objects.filter(
-    actual_return_date=today).count()
-count_available_book_total = Book.objects.aggregate(total=Sum("inventory"))
-count_number_of_titles = Book.objects.distinct().count()
+@sync_to_async
+def get_count_borrowing_total():
+    return Borrowing.objects.count()
+
+
+@sync_to_async
+def get_count_returned_today():
+    return Borrowing.objects.filter(
+        actual_return_date=today).count()
+
+
+@sync_to_async
+def get_count_available_book_total():
+    return Book.objects.aggregate(total=Sum("inventory"))
+
+
+@sync_to_async
+def get_count_number_of_titles():
+    return Book.objects.distinct().count()
 
 
 @dp.message_handler(commands="borrowing_today")
@@ -49,6 +64,7 @@ async def borrowing_today_handler(message: types.Message):
 
 @dp.message_handler(commands="borrowing_total")
 async def borrowing_total(message: types.Message):
+    count_borrowing_total = await get_count_borrowing_total()
     await bot.send_message(
         message.from_user.id,
         f"borrowed total: {count_borrowing_total}"
@@ -57,6 +73,7 @@ async def borrowing_total(message: types.Message):
 
 @dp.message_handler(commands="returned_today")
 async def returned_today(message: types.Message):
+    count_returned_today = await get_count_returned_today()
     await bot.send_message(
         message.from_user.id,
         f"returned today: {count_returned_today}"
@@ -65,6 +82,7 @@ async def returned_today(message: types.Message):
 
 @dp.message_handler(commands="available_books")
 async def available_books_total(message: types.Message):
+    count_available_book_total = await get_count_available_book_total()
     await bot.send_message(
         message.from_user.id,
         f"available_books: {count_available_book_total['total']}"
@@ -73,6 +91,7 @@ async def available_books_total(message: types.Message):
 
 @dp.message_handler(commands="number_of_titles")
 async def count_titles(message: types.Message):
+    count_number_of_titles = await get_count_number_of_titles()
     await bot.send_message(
         message.from_user.id,
         f"number of titles: {count_number_of_titles}"
@@ -125,7 +144,6 @@ async def start(message: types.Message):
 
 @dp.message_handler(commands=["get_list_borrowing"])
 async def get_data_from_drf(message: types.Message):
-    # Process the data and send a response
     await message.reply(recive_data(user_response))
 
 
