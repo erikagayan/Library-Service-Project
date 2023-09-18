@@ -1,0 +1,654 @@
+[
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$pwLBNloyvXga00v1Tq2Hzk$NNRm+EfOlKPUuIBmPSVvt66yYJ/QMng2hgg7MJZPChw=",
+      "last_login": null,
+      "is_superuser": true,
+      "first_name": "Yana",
+      "last_name": "Admin",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2023-08-14T19:32:57.490Z",
+      "email": "admin.yana@admin.com",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$Cznk4sRCiPr0yRIgHjcb7t$tTW7vhnWAM5LeQSjOuqQ0uxPWylUqdNgOj50rurww9U=",
+      "last_login": null,
+      "is_superuser": true,
+      "first_name": "Rostyk",
+      "last_name": "Admin",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2023-08-14T19:35:07.605Z",
+      "email": "admin.rostyk@admin.com",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$ht0xjU9GMW4GTY8F5kDseE$b8IwrECOZaZHLEIuH01Mx++THv0uZAnLlMPQ1tIZUPs=",
+      "last_login": null,
+      "is_superuser": true,
+      "first_name": "Erik",
+      "last_name": "Admin",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2023-08-14T19:35:49.661Z",
+      "email": "admin.erik@admin.com",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$czNNYtoxFY4CcTKQNUpNMi$eCbev05vLgJ5P8uoEP+r9b7RNrjwjnXtMrSnSbRjDZg=",
+      "last_login": null,
+      "is_superuser": true,
+      "first_name": "Vlad",
+      "last_name": "Admin",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2023-08-14T19:36:33.317Z",
+      "email": "admin.vlad@admin.com",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$GMDYO9NBM7YEzgoJfgBYpw$jFz3BV2Mr227WJCGBFD/SYCG5A5D1342WkodtGc2s9M=",
+      "last_login": null,
+      "is_superuser": true,
+      "first_name": "Taras",
+      "last_name": "Admin",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2023-08-14T19:37:15.154Z",
+      "email": "admin.taras@admin.com",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 6,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$6Q4y451JPGm3mRWt9HrgsM$4BDSGWHrcF9kB87qJqbKxymHBnoEkt9tuKRbOhty/fw=",
+      "last_login": "2023-08-15T09:16:55.007Z",
+      "is_superuser": true,
+      "first_name": "Masha",
+      "last_name": "Admin",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2023-08-14T19:38:01.228Z",
+      "email": "admin.masha@admin.com",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 1,
+    "fields": {
+      "title": "Things Fall Apart",
+      "author": "Chinua Achebe",
+      "cover": "HARD",
+      "inventory": 10,
+      "daily_fee": "2.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 2,
+    "fields": {
+      "title": "Fairy tales",
+      "author": "Hans Christian Andersen",
+      "cover": "HARD",
+      "inventory": 50,
+      "daily_fee": "1.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 3,
+    "fields": {
+      "title": "The Divine Comedy",
+      "author": "Dante Alighieri",
+      "cover": "SOFT",
+      "inventory": 30,
+      "daily_fee": "1.50"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 4,
+    "fields": {
+      "title": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "cover": "HARD",
+      "inventory": 100,
+      "daily_fee": "1.75"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 5,
+    "fields": {
+      "title": "Molloy, Malone Dies, The Unnamable, the trilogy",
+      "author": "Samuel Beckett",
+      "cover": "SOFT",
+      "inventory": 250,
+      "daily_fee": "1.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 6,
+    "fields": {
+      "title": "The Decameron",
+      "author": "Giovanni Boccaccio",
+      "cover": "SOFT",
+      "inventory": 500,
+      "daily_fee": "5.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 7,
+    "fields": {
+      "title": "Ficciones",
+      "author": "Jorge Luis Borges",
+      "cover": "SOFT",
+      "inventory": 20,
+      "daily_fee": "4.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 8,
+    "fields": {
+      "title": "Wuthering Heights",
+      "author": "Emily Bronte",
+      "cover": "HARD",
+      "inventory": 112,
+      "daily_fee": "3.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 9,
+    "fields": {
+      "title": "The Stranger",
+      "author": "Albert Camus",
+      "cover": "HARD",
+      "inventory": 110,
+      "daily_fee": "2.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 10,
+    "fields": {
+      "title": "Poems",
+      "author": "Paul Celan",
+      "cover": "SOFT",
+      "inventory": 75,
+      "daily_fee": "8.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 11,
+    "fields": {
+      "title": "Journey to the End of the Night",
+      "author": "Louis-Ferdinand Celine",
+      "cover": "HARD",
+      "inventory": 48,
+      "daily_fee": "1.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 12,
+    "fields": {
+      "title": "Don Quijote De La Mancha",
+      "author": "Miguel de Cervantes",
+      "cover": "HARD",
+      "inventory": 35,
+      "daily_fee": "4.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 13,
+    "fields": {
+      "title": "The Canterbury Tales",
+      "author": "Geoffrey Chaucer",
+      "cover": "SOFT",
+      "inventory": 35,
+      "daily_fee": "1.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 14,
+    "fields": {
+      "title": "Nostromo",
+      "author": "Joseph Conrad",
+      "cover": "HARD",
+      "inventory": 15,
+      "daily_fee": "2.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 15,
+    "fields": {
+      "title": "Great Expectations",
+      "author": "Charles Dickens",
+      "cover": "HARD",
+      "inventory": 28,
+      "daily_fee": "2.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 16,
+    "fields": {
+      "title": "Jacques the Fatalist",
+      "author": "Denis Diderot",
+      "cover": "SOFT",
+      "inventory": 83,
+      "daily_fee": "8.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 17,
+    "fields": {
+      "title": "Middlemarch",
+      "author": "George Eliot",
+      "cover": "SOFT",
+      "inventory": 82,
+      "daily_fee": "5.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 18,
+    "fields": {
+      "title": "Invisible Man",
+      "author": "Ralph Ellison",
+      "cover": "HARD",
+      "inventory": 45,
+      "daily_fee": "4.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 19,
+    "fields": {
+      "title": "Medea",
+      "author": "Euripides",
+      "cover": "HARD",
+      "inventory": 49,
+      "daily_fee": "7.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 20,
+    "fields": {
+      "title": "Absalom, Absalom!",
+      "author": "William Faulkner",
+      "cover": "SOFT",
+      "inventory": 83,
+      "daily_fee": "3.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 21,
+    "fields": {
+      "title": "The Sound and the Fury",
+      "author": "William Faulkner",
+      "cover": "SOFT",
+      "inventory": 78,
+      "daily_fee": "2.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 22,
+    "fields": {
+      "title": "Madame Bovary",
+      "author": "Gustave Flaubert",
+      "cover": "HARD",
+      "inventory": 86,
+      "daily_fee": "2.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 23,
+    "fields": {
+      "title": "Sentimental Education",
+      "author": "Gustave Flaubert",
+      "cover": "SOFT",
+      "inventory": 28,
+      "daily_fee": "4.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 24,
+    "fields": {
+      "title": "Faust",
+      "author": "Johann Wolfgang von Goethe",
+      "cover": "HARD",
+      "inventory": 93,
+      "daily_fee": "3.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 25,
+    "fields": {
+      "title": "Hunger",
+      "author": "Knut Hamsun",
+      "cover": "HARD",
+      "inventory": 87,
+      "daily_fee": "6.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 26,
+    "fields": {
+      "title": "The Old Man and the Sea",
+      "author": "Ernest Hemingway",
+      "cover": "HARD",
+      "inventory": 56,
+      "daily_fee": "8.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 27,
+    "fields": {
+      "title": "Iliad",
+      "author": "Homer",
+      "cover": "HARD",
+      "inventory": 300,
+      "daily_fee": "3.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 28,
+    "fields": {
+      "title": "Odyssey",
+      "author": "Homer",
+      "cover": "SOFT",
+      "inventory": 215,
+      "daily_fee": "2.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 29,
+    "fields": {
+      "title": "A Doll's House",
+      "author": "Henrik Ibsen",
+      "cover": "HARD",
+      "inventory": 325,
+      "daily_fee": "5.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 30,
+    "fields": {
+      "title": "Ulysses",
+      "author": "James Joyce",
+      "cover": "SOFT",
+      "inventory": 202,
+      "daily_fee": "3.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 31,
+    "fields": {
+      "title": "Stories",
+      "author": "Franz Kafka",
+      "cover": "HARD",
+      "inventory": 842,
+      "daily_fee": "1.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 32,
+    "fields": {
+      "title": "The Trial",
+      "author": "Franz Kafka",
+      "cover": "SOFT",
+      "inventory": 35,
+      "daily_fee": "4.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 33,
+    "fields": {
+      "title": "The Castle",
+      "author": "Franz Kafka",
+      "cover": "SOFT",
+      "inventory": 142,
+      "daily_fee": "2.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 34,
+    "fields": {
+      "title": "The Sound of the Mountain",
+      "author": "Yasunari Kawabata",
+      "cover": "HARD",
+      "inventory": 457,
+      "daily_fee": "5.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 35,
+    "fields": {
+      "title": "Zorba the Greek",
+      "author": "Nikos Kazantzakis",
+      "cover": "SOFT",
+      "inventory": 120,
+      "daily_fee": "2.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 36,
+    "fields": {
+      "title": "Sons and Lovers",
+      "author": "D. H. Lawrence",
+      "cover": "HARD",
+      "inventory": 150,
+      "daily_fee": "1.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 37,
+    "fields": {
+      "title": "Poems",
+      "author": "Giacomo Leopardi",
+      "cover": "SOFT",
+      "inventory": 185,
+      "daily_fee": "3.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 38,
+    "fields": {
+      "title": "The Golden Notebook",
+      "author": "Doris Lessing",
+      "cover": "HARD",
+      "inventory": 194,
+      "daily_fee": "5.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 39,
+    "fields": {
+      "title": "Pippi Longstocking",
+      "author": "Astrid Lindgren",
+      "cover": "SOFT",
+      "inventory": 265,
+      "daily_fee": "4.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 40,
+    "fields": {
+      "title": "Diary of a Madman",
+      "author": "Lu Xun",
+      "cover": "HARD",
+      "inventory": 254,
+      "daily_fee": "8.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 41,
+    "fields": {
+      "title": "Children of Gebelawi",
+      "author": "Naguib Mahfouz",
+      "cover": "SOFT",
+      "inventory": 478,
+      "daily_fee": "9.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 42,
+    "fields": {
+      "title": "Buddenbrooks",
+      "author": "Thomas Mann",
+      "cover": "HARD",
+      "inventory": 125,
+      "daily_fee": "7.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 43,
+    "fields": {
+      "title": "The Magic Mountain",
+      "author": "Thomas Mann",
+      "cover": "HARD",
+      "inventory": 254,
+      "daily_fee": "10.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 44,
+    "fields": {
+      "title": "Moby Dick",
+      "author": "Herman Melville",
+      "cover": "HARD",
+      "inventory": 110,
+      "daily_fee": "12.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 45,
+    "fields": {
+      "title": "Essays",
+      "author": "Michel de Montaigne",
+      "cover": "SOFT",
+      "inventory": 335,
+      "daily_fee": "5.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 46,
+    "fields": {
+      "title": "History",
+      "author": "Elsa Morante",
+      "cover": "HARD",
+      "inventory": 665,
+      "daily_fee": "2.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 47,
+    "fields": {
+      "title": "Beloved",
+      "author": "Toni Morrison",
+      "cover": "HARD",
+      "inventory": 885,
+      "daily_fee": "14.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 48,
+    "fields": {
+      "title": "The Tale of Genji",
+      "author": "Murasaki Shikibu",
+      "cover": "HARD",
+      "inventory": 99,
+      "daily_fee": "1.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 49,
+    "fields": {
+      "title": "The Man Without Qualities",
+      "author": "Robert Musil",
+      "cover": "SOFT",
+      "inventory": 554,
+      "daily_fee": "2.00"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 50,
+    "fields": {
+      "title": "Nineteen Eighty-Four",
+      "author": "George Orwell",
+      "cover": "HARD",
+      "inventory": 115,
+      "daily_fee": "10.00"
+    }
+  }
+]
